@@ -28,7 +28,9 @@ class Usuario(models.Model):
     userPassword = models.CharField(max_length=50)
     isAdmin = models.BooleanField(default=False)
 
+    # Un usuario solo tiene anidado un perfil y viceversa
     perfil = models.OneToOneField(Perfil, on_delete=models.CASCADE)
+    # Un usuario solo tiene una foto anidada y viceversa 
     fotoPerfil = models.OneToOneField(FotoPerfil, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -66,7 +68,9 @@ class Modulo(models.Model):
     idModulo=models.AutoField(primary_key=True)
     nombreModulo=models.CharField(max_length=50)
     
+    # Varios módulos pueden tener una dificultad y una dificultad se presentará en varios módulos.
     dif=models.ForeignKey(Dificultad, on_delete=models.CASCADE)
+    # Varios módulos pueden tener una especialidad y una especialidad se presentará en varios módulos.
     espe=models.ForeignKey(Especialidad,on_delete=models.CASCADE)
 
     def __str__(self):
@@ -81,8 +85,11 @@ class Progreso(models.Model):
     fechaFin = models.DateField()
     puntajeObtenido = models.IntegerField()
     
+    # Uno o varios progresos pueden tener una misma categoría de avance o estado final.
     estadoFinal = models.ForeignKey(EstadoFinal, on_delete=models.CASCADE)
+    # Un o varios progresos estarán anidados a un mismo usuario
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    # Un cierto progreso solo se vinculará con un módulo
     modulo = models.OneToOneField(Modulo, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -94,6 +101,7 @@ class Tema(models.Model):
     idTema = models.AutoField(primary_key=True)
     nombreTema = models.CharField(max_length=100)
     
+    # Uno o Muchos temas estarán integrados en un módulo
     modulo = models.ForeignKey(Modulo, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -104,6 +112,7 @@ class Pregunta(models.Model):
     idPregunta = models.AutoField(primary_key=True) 
     pregunta = models.CharField(max_length=500) 
 
+    # Una o Muchas preguntas estarán integradas en un tema
     tema = models.ForeignKey(Tema, on_delete=models.CASCADE, related_name='preguntas')  
     
     def __str__(self):
@@ -116,6 +125,7 @@ class Alternativa (models.Model):
     alternativa=models.CharField(max_length=250)
     puntajeObtenido=models.BigIntegerField()
     
+    # Las preguntas tendrán varias alternativas.
     pregunta=models.ForeignKey(Pregunta, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -126,6 +136,7 @@ class AlternativaSeleccionada(models.Model):
     idRespuesta=models.AutoField(primary_key=True)
     fechaRegistroRespuesta=models.DateField()
 
+    # Solo una alternativa será la seleccionada.
     alternativa=models.OneToOneField(Alternativa,on_delete=models.CASCADE)
 
     def __str__(self):
