@@ -5,6 +5,10 @@ from rest_framework.routers import DefaultRouter
 
 from api import views
 
+# Imagenes
+from django.conf import settings
+from django.conf.urls.static import static
+
 # By Danniels
 router = DefaultRouter()
 router.register(r'FotoPerfil', views.FotoPerfilViewset)
@@ -31,4 +35,4 @@ router.register(r"AlternativaSeleccionada",views.AlternativaSeleccionaViewsets)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls))
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

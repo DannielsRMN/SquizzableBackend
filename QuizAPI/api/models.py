@@ -28,8 +28,8 @@ class Usuario(models.Model):
     userPassword = models.CharField(max_length=50)
     isAdmin = models.BooleanField(default=False)
 
-    perfil = models.ForeignKey(Perfil, on_delete=models.CASCADE)
-    fotoPerfil = models.ForeignKey(FotoPerfil, on_delete=models.CASCADE)
+    perfil = models.OneToOneField(Perfil, on_delete=models.CASCADE)
+    fotoPerfil = models.OneToOneField(FotoPerfil, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Nombre de usuario: {self.username}"
@@ -75,6 +75,7 @@ class Modulo(models.Model):
 # By Edson.
 # Progreso que manejará el avance de un usuario y un cierto módulo
 class Progreso(models.Model):
+    idProgreso = models.AutoField(primary_key=True)
     porcentajeCompletado = models.FloatField()
     fechaInicio = models.DateField()
     fechaFin = models.DateField()
@@ -82,7 +83,7 @@ class Progreso(models.Model):
     
     estadoFinal = models.ForeignKey(EstadoFinal, on_delete=models.CASCADE)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    modulo = models.ForeignKey(Modulo, on_delete=models.CASCADE)
+    modulo = models.OneToOneField(Modulo, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Progreso de {self.usuario.username} en {self.modulo.nombreModulo} - {self.porcentajeCompletado}%"
@@ -125,7 +126,7 @@ class AlternativaSeleccionada(models.Model):
     idRespuesta=models.AutoField(primary_key=True)
     fechaRegistroRespuesta=models.DateField()
 
-    alternativa=models.ForeignKey(Alternativa,on_delete=models.CASCADE)
+    alternativa=models.OneToOneField(Alternativa,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.fechaRegistroRespuesta
