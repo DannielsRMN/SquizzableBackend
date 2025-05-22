@@ -1,8 +1,14 @@
-Presentación de Lenguaje de Programación - Equipo TomCat
+# 🚀 Presentación de Lenguaje de Programación I - Equipo **TomCat**
 
-Este repositorio fue creado para la presetación de avances para la asignatura de Lenguaje de Programación I. Los integrantes de el grupo son:
-  1. Martel Neira Danniels Rafael
-  2. Caldas Sifuentes Raul
-  3. Lopez Castillo Jean Andres
-  4. Dionicio Orihuela Edson
-  5. Palacios Presentacion Jeferson
+Este repositorio fue creado para la presentación de avances del curso **Lenguaje de Programación I**. Aquí encontrarás documentación, código fuente y recursos relacionados con nuestro proyecto.
+
+## 👥 Integrantes del equipo:
+
+- 👤 **Martel Neira Danniels Rafael**
+- 👤 **Caldas Sifuentes Raul**
+- 👤 **Lopez Castillo Jean Andres**
+- 👤 **Dionicio Orihuela Edson**
+- 👤 **Palacios Presentación Jeferson**
+
+## 📁 Estructura del repositorio
+
