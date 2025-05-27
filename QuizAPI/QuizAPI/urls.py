@@ -3,6 +3,8 @@ from django.urls import path, include
 
 from rest_framework.routers import DefaultRouter
 
+from rest_framework.authtoken.views import obtain_auth_token
+
 from api import views
 
 # Imagenes
@@ -34,5 +36,6 @@ router.register(r"AlternativaSeleccionada",views.AlternativaSeleccionaViewsets)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
+    path('login/', obtain_auth_token, name='api_token_auth'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

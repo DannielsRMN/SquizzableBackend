@@ -4,19 +4,22 @@ from . import models
 # By Danniels
 
 class FotoPerfilSerializador(serializers.ModelSerializer):
+
+    nombreUsuario = serializers.ReadOnlyField(source='usuario.username')
+
     class Meta:
         model = models.FotoPerfil
         fields = "__all__"
 
 class PerfilSerializador(serializers.ModelSerializer):
+
+    nombreUsuario = serializers.ReadOnlyField(source='usuario.username')
+
     class Meta:
         model = models.Perfil
         fields = "__all__"
 
 class UsuarioSerializador(serializers.ModelSerializer):
-
-    Perfil_nombre = serializers.ReadOnlyField(source='perfil.nickname')
-    FotoPerfil_id = serializers.ReadOnlyField(source='fotoPerfil.idFoto')
 
     class Meta:
         model = models.Usuario

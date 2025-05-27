@@ -1,4 +1,16 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+# Clase para manejar los datos de login o permisos de administrador del usuario
+class Usuario(AbstractUser):
+    #idUniqueUser = models.AutoField(primary_key=True)
+    #username = models.CharField(max_length=50)
+    #email = models.CharField(max_length=100)
+    #userPassword = models.CharField(max_length=50)
+    #isAdmin = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Nombre de usuario: {self.username}"
 
 # Create your models here.
 
@@ -7,6 +19,8 @@ from django.db import models
 class FotoPerfil(models.Model):
     idFoto = models.AutoField(primary_key=True)
     pfp = models.ImageField(upload_to="imagenes/")
+    
+    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Foto de Perfil Nro. {self.pfp}"
@@ -16,25 +30,12 @@ class Perfil(models.Model):
     idPerfil = models.AutoField(primary_key=True)
     nickname = models.CharField(max_length=50)
     puntajeTotal = models.IntegerField()
+
+    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
     
     def __str__(self):
         return f"Perfil de {self.nickname}"
 
-# Clase para manejar los datos de login o permisos de administrador del usuario
-class Usuario(models.Model):
-    idUniqueUser = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=50)
-    email = models.CharField(max_length=100)
-    userPassword = models.CharField(max_length=50)
-    isAdmin = models.BooleanField(default=False)
-
-    # Un usuario solo tiene anidado un perfil y viceversa
-    perfil = models.OneToOneField(Perfil, on_delete=models.CASCADE)
-    # Un usuario solo tiene una foto anidada y viceversa 
-    fotoPerfil = models.OneToOneField(FotoPerfil, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"Nombre de usuario: {self.username}"
 
 # Clase que manejará las dificultades que manejará el software, así evitamos facil y fácil.    
 class Dificultad(models.Model):
