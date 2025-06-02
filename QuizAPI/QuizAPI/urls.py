@@ -11,28 +11,21 @@ from api import views
 from django.conf import settings
 from django.conf.urls.static import static
 
-# By Danniels
 router = DefaultRouter()
 router.register(r'FotoPerfil', views.FotoPerfilViewset)
-router.register(r'Perfil', views.PerfilViewset)
 router.register(r'Usuario', views.UsuarioViewset)
-router.register(r'Dificultad', views.DificultadViewset)
-router.register(r'EstadoFinal', views.EstadoFinalViewset)
+router.register(r'Evaluacion', views.EvaluacionViewsets)
+router.register(r'Cargo', views.CargoViewsets)
 
-# By Raul.
 router.register('Especialidad',views.EspecialidadViewset)
 router.register('Modulo',views.ModuloViewset)
 
-# By Edson.
 router.register('Progreso', views.ProgresoViewset)
 
-# By Jean.
 router.register('Temas', views.TemaViewSet)
 router.register('Preguntas', views.PreguntaViewSet)
 
-# By Jeferson.
 router.register(r"Alternativa",views.AlternativaViewsets)
-router.register(r"AlternativaSeleccionada",views.AlternativaSeleccionaViewsets)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

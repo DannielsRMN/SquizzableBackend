@@ -13,31 +13,11 @@ class FotoPerfilViewset(viewsets.ModelViewSet):
 
     permission_classes = [permissions.IsAuthenticated]
 
-class PerfilViewset(viewsets.ModelViewSet):
-    queryset = models.Perfil.objects.all()
-    serializer_class = serializers.PerfilSerializador
-
-    permission_classes = [permissions.IsAuthenticated]
-
 class UsuarioViewset(viewsets.ModelViewSet):
     queryset = models.Usuario.objects.all()
     serializer_class = serializers.UsuarioSerializador
 
     permission_classes = [permissions.IsAuthenticated]
-
-class DificultadViewset(viewsets.ModelViewSet):
-    queryset = models.Dificultad.objects.all()
-    serializer_class = serializers.DificultadSerializador
-
-    permission_classes = [permissions.IsAuthenticated]
-
-class EstadoFinalViewset(viewsets.ModelViewSet):
-    queryset = models.EstadoFinal.objects.all()
-    serializer_class = serializers.EstadoFinalSerializador
-
-    permission_classes = [permissions.IsAuthenticated]
-
-# By Raul.
 
 class EspecialidadViewset(viewsets.ModelViewSet):
    queryset = models.Especialidad.objects.all()
@@ -51,15 +31,11 @@ class ModuloViewset(viewsets.ModelViewSet):
 
    permission_classes = [permissions.IsAuthenticated]
 
-# By Edson.
-
 class ProgresoViewset(viewsets.ModelViewSet):
     queryset = models.Progreso.objects.all()
     serializer_class = serializers.ProgresoSerializer
 
     permission_classes = [permissions.IsAuthenticated]
-
-# By Jean.
 
 class TemaViewSet(viewsets.ModelViewSet):
     queryset = models.Tema.objects.all()
@@ -73,16 +49,20 @@ class PreguntaViewSet(viewsets.ModelViewSet):
 
     permission_classes = [permissions.IsAuthenticated]
 
-# By Jeferson.
-
 class AlternativaViewsets (viewsets.ModelViewSet):
     queryset=models.Alternativa.objects.all()
     serializer_class=serializers.SerializadorAlternativa
 
     permission_classes = [permissions.IsAuthenticated]
 
-class AlternativaSeleccionaViewsets (viewsets.ModelViewSet):
-    queryset=models.AlternativaSeleccionada.objects.all()
-    serializer_class=serializers.SerializadorAlternativaSelecionado
-    
+class EvaluacionViewsets (viewsets.ModelViewSet):
+    queryset=models.Evaluacion.objects.all()
+    serializer_class=serializers.EvaluacionSerializador
+
+    permission_classes = [permissions.IsAuthenticated]
+
+class CargoViewsets (viewsets.ModelViewSet):
+    queryset = models.Cargo.objects.all()
+    serializer_class=serializers.CargoSerializador
+
     permission_classes = [permissions.IsAuthenticated]
