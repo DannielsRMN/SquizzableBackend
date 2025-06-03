@@ -1,11 +1,15 @@
 from django.shortcuts import render
 from rest_framework import viewsets, permissions
 
+from rest_framework import response
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
+
+
 from . import models, serializers
 
 # Create your views here.
-
-# By Danniels
 
 class FotoPerfilViewset(viewsets.ModelViewSet):
     queryset = models.FotoPerfil.objects.all()
@@ -66,3 +70,21 @@ class CargoViewsets (viewsets.ModelViewSet):
     serializer_class=serializers.CargoSerializador
 
     permission_classes = [permissions.IsAuthenticated]
+
+class RespuestaViewsets (viewsets.ModelViewSet):
+    queryset = models.Respuesta.objects.all()
+    serializer_class = serializers.RespuestaSerializador
+
+    permission_classes = [permissions.IsAuthenticated]
+
+class CustomAuthToken(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data, context={'request':request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            'token': token.key,
+            'user_id': user.pk,
+            'username': user.username
+        })

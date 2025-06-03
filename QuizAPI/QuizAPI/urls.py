@@ -16,6 +16,7 @@ router.register(r'FotoPerfil', views.FotoPerfilViewset)
 router.register(r'Usuario', views.UsuarioViewset)
 router.register(r'Evaluacion', views.EvaluacionViewsets)
 router.register(r'Cargo', views.CargoViewsets)
+router.register(r'Respuesta', views.RespuestaViewsets)
 
 router.register('Especialidad',views.EspecialidadViewset)
 router.register('Modulo',views.ModuloViewset)
@@ -31,4 +32,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('login/', obtain_auth_token, name='api_token_auth'),
+    path('token-auth/', views.CustomAuthToken.as_view(),name='token-auth'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

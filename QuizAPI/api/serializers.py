@@ -19,6 +19,15 @@ class UsuarioSerializador(serializers.ModelSerializer):
         model = models.Usuario
         fields = "__all__"
 
+    def create(self, validated_data):
+        user = models.Usuario(
+            email = validated_data['email'],
+            username = validated_data['username'],
+        )
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+
 class EspecialidadSerializer(serializers.ModelSerializer):
     
     class Meta:
@@ -61,4 +70,9 @@ class CargoSerializador(serializers.ModelSerializer):
     class Meta:
         model=models.Cargo
         fields = '__all__'
-        
+
+class RespuestaSerializador(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Respuesta
+        fields = '__all__'
