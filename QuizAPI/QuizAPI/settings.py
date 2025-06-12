@@ -38,6 +38,9 @@ AUTH_USER_MODEL = 'api.Usuario'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES' : [
         'rest_framework.authentication.TokenAuthentication'
+    ],
+    'DEFAULT_PERMISSION_CLASSES' : [
+        'rest_framework.permissions.IsAuthenticated'
     ]
 }
 
@@ -59,9 +62,25 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
     'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
     'x-csrftoken',
-    'X-API-KEY'
+    'x-requested-with',
+    'x-api-key',
+]
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
 ]
 
 API_KEY = 'jnxAAq7a65wzXyQ3qPPF'

@@ -32,5 +32,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('login/', obtain_auth_token, name='api_token_auth'),
-    path('token-auth/', views.CustomAuthToken.as_view(),name='token-auth'),
+    path('api/token-auth/', views.CustomAuthToken.as_view(),name='token-auth'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
