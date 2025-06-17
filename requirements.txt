@@ -9,3 +9,5 @@ tzdata==2025.2
 
 # Comando: pip install -r requirements.txt
 # OJO: Ejecutar el comando cuando estés en la carpeta donde esté el archivo requirements.txt
+
+# Hola, soy Danniels
