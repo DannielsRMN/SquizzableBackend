@@ -78,3 +78,26 @@ class RespuestaSerializador(serializers.ModelSerializer):
     class Meta:
         model = models.Respuesta
         fields = '__all__'
+
+# Testeo
+
+class ProductoSerializador(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Producto
+        fields = '__all__'
+
+class AlmacenSerializador(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Almacen
+        fields = '__all__'
+
+class StockSerializador(serializers.ModelSerializer):
+    # Para que llegue la información completa
+    producto = ProductoSerializador()
+    almacen = AlmacenSerializador()
+
+    class Meta:
+        model = models.Stock
+        fields = ['producto', 'almacen', 'cantidad']

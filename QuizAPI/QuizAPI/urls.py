@@ -28,6 +28,12 @@ router.register('Preguntas', views.PreguntaViewSet)
 
 router.register(r"Alternativa",views.AlternativaViewsets)
 
+# Test
+router.register(r"Producto",views.ProductoViewset)
+router.register(r"Almacen",views.AlmacenViewset)
+router.register(r"Stock",views.StockViewset)
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),

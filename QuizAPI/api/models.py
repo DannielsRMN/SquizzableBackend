@@ -27,6 +27,13 @@ class UsuarioManager(BaseUserManager):
         
         return self.create_user(username,email,password,**extra_fields)
 
+class Especialidad(models.Model):
+    idEspecialidad=models.AutoField(primary_key=True)
+    nombreEspecialidad=models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.nombreEspecialidad
+
 class Usuario(AbstractUser):
 
     objects = UsuarioManager()
@@ -35,17 +42,13 @@ class Usuario(AbstractUser):
     fechaContratacion = models.DateField(null=True ,blank=True)
     puntos = models.IntegerField(default=0)
 
-    cargo = models.ForeignKey(Cargo, on_delete=models.CASCADE, null=True ,blank=True)
+    cargo = models.ForeignKey(Especialidad,on_delete=models.CASCADE, null=True, blank=True)
 
 class FotoPerfil(models.Model):
     idFoto = models.AutoField(primary_key=True)
     pfp = models.ImageField(upload_to="usuarios/", null=True, blank=True)
     
     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
-
-class Especialidad(models.Model):
-    idEspecialidad=models.AutoField(primary_key=True)
-    nombreEspecialidad=models.CharField(max_length=50)
 
 class Modulo(models.Model):
     idModulo=models.AutoField(primary_key=True)
@@ -95,3 +98,31 @@ class Progreso(models.Model):
     ronda = models.IntegerField(default=1)
     
     evaluacion = models.OneToOneField(Evaluacion, on_delete=models.CASCADE)
+
+# Vista personalizada
+
+class UnidadMedida(models.Model):
+    idUnidad = models.AutoField(primary_key=True)
+    unidad = models.CharField(max_length=25)
+    sigla = models.CharField(max_length=5)
+
+class Producto(models.Model):
+    idProducto = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=50)
+
+    unidad = models.ForeignKey(UnidadMedida, on_delete=models.CASCADE, blank=True, null=True)
+
+class Almacen(models.Model):
+    idAlmacen = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=50)
+
+class Stock(models.Model):
+    idStock = models.AutoField(primary_key=True)
+
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE, null=True, blank=True)
+    almacen = models.ForeignKey(Almacen, on_delete=models.CASCADE, blank=True, null=True)
+
+    cantidad = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        unique_together = ('producto','almacen')

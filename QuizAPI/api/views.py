@@ -6,6 +6,8 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 
+# Testeo
+from rest_framework.decorators import action
 
 from . import models, serializers
 
@@ -22,7 +24,8 @@ class UsuarioViewset(viewsets.ModelViewSet):
     queryset = models.Usuario.objects.all()
     serializer_class = serializers.UsuarioSerializador
 
-    permission_classes = [permissions.IsAuthenticated]
+    #permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
 class EspecialidadViewset(viewsets.ModelViewSet):
    queryset = models.Especialidad.objects.all()
@@ -89,3 +92,33 @@ class CustomAuthToken(ObtainAuthToken):
             'user_id': user.pk,
             'username': user.username
         })
+    
+# Testeo
+
+class ProductoViewset(viewsets.ModelViewSet):
+    queryset = models.Producto.objects.all()
+    serializer_class = serializers.ProductoSerializador
+
+    #permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
+
+class AlmacenViewset(viewsets.ModelViewSet):
+    queryset = models.Almacen.objects.all()
+    serializer_class = serializers.AlmacenSerializador
+
+    #permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
+
+class StockViewset(viewsets.ModelViewSet):
+    # Decorador, sirve para decorar (Algo que se dice de la linea inferior | Permite consultar el stock)
+    @action(detail=False, methods=['get'], url_path='consulta')
+    def consultarStock(self, request):
+        producto_id = request.query_params.get('producto_id')
+        almacen_id = request.query_params.get('almacen_id')
+
+        stock = models.Stock.objects.get(idProducto=producto_id,
+                                         idAlmacen=almacen_id)
+        
+        serializer = serializers.StockSerializador(stock)
+
+        return Response(serializer.data)
