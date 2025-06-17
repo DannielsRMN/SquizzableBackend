@@ -15,7 +15,8 @@ class FotoPerfilViewset(viewsets.ModelViewSet):
     queryset = models.FotoPerfil.objects.all()
     serializer_class = serializers.FotoPerfilSerializador
 
-    permission_classes = [permissions.IsAuthenticated]
+    #permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
 class UsuarioViewset(viewsets.ModelViewSet):
     queryset = models.Usuario.objects.all()

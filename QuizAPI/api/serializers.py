@@ -3,6 +3,8 @@ from . import models
 
 class FotoPerfilSerializador(serializers.ModelSerializer):
 
+    usuario_ref = serializers.ReadOnlyField(source='usuario.username')
+
     class Meta:
         model = models.FotoPerfil
         fields = "__all__"

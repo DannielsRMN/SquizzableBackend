@@ -39,7 +39,7 @@ class Usuario(AbstractUser):
 
 class FotoPerfil(models.Model):
     idFoto = models.AutoField(primary_key=True)
-    pfp = models.ImageField(upload_to="usuarios/")
+    pfp = models.ImageField(upload_to="usuarios/", null=True, blank=True)
     
     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
 
