@@ -37,6 +37,8 @@ class EspecialidadSerializer(serializers.ModelSerializer):
 
 class ModuloSerializer(serializers.ModelSerializer):
 
+    nombreEspecialidad = serializers.ReadOnlyField(source = 'especialidad.nombreEspecialidad')
+
     class Meta:
         model = models.Modulo
         fields = "__all__"
