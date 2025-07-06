@@ -59,7 +59,8 @@ class TemaSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class PreguntaSerializer(serializers.ModelSerializer):
-
+    
+    tema_nombre = serializers.ReadOnlyField(source='tema.nombreTema')
     class Meta:
         model = models.Pregunta
         fields = "__all__"
