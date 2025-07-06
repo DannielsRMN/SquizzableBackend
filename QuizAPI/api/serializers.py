@@ -53,6 +53,7 @@ class ProgresoSerializer(serializers.ModelSerializer):
 
 class TemaSerializer(serializers.ModelSerializer):
 
+    nombreModulo = serializers.ReadOnlyField(source='modulo.nombreModulo')
     class Meta:
         model = models.Tema
         fields = "__all__"
