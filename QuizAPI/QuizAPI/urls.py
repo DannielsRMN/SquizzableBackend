@@ -15,7 +15,6 @@ router = DefaultRouter()
 router.register(r'FotoPerfil', views.FotoPerfilViewset)
 router.register(r'Usuario', views.UsuarioViewset)
 router.register(r'Evaluacion', views.EvaluacionViewsets)
-router.register(r'Cargo', views.CargoViewsets)
 router.register(r'Respuesta', views.RespuestaViewsets)
 
 router.register('Especialidad',views.EspecialidadViewset)
@@ -33,4 +32,5 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('login/', obtain_auth_token, name='api_token_auth'),
     path('api/token-auth/', views.CustomAuthToken.as_view(),name='token-auth'),
+    path('api/modulos/<int:especialidadID>/', views.ModulosPersonales.as_view(), name='modulos-personales'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

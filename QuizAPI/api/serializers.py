@@ -69,12 +69,6 @@ class SerializadorAlternativa(serializers.ModelSerializer):
         model=models.Alternativa
         fields = "__all__"
 
-class CargoSerializador(serializers.ModelSerializer):
-
-    class Meta:
-        model=models.Cargo
-        fields = '__all__'
-
 class RespuestaSerializador(serializers.ModelSerializer):
 
     class Meta:
