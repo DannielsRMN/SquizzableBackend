@@ -17,6 +17,8 @@ class EvaluacionSerializador(serializers.ModelSerializer):
 
 class UsuarioSerializador(serializers.ModelSerializer):
 
+    encargado = serializers.ReadOnlyField(source='especialidad.nombreEspecialidad')
+
     class Meta:
         model = models.Usuario
         fields = "__all__"

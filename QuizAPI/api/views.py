@@ -94,3 +94,9 @@ class ModulosPersonales(ListAPIView):
     def get_queryset(self):
         especialidadID = self.kwargs['especialidadID']
         return models.Modulo.objects.filter(especialidad=especialidadID)
+
+class ClasificacionUsuario(ListAPIView):
+    serializer_class = serializers.UsuarioSerializador
+
+    def get_queryset(self):
+        return models.Usuario.objects.order_by('-puntos')
