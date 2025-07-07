@@ -17,6 +17,8 @@ class EvaluacionSerializador(serializers.ModelSerializer):
 
 class UsuarioSerializador(serializers.ModelSerializer):
 
+    encargado = serializers.ReadOnlyField(source='especialidad.nombreEspecialidad')
+
     class Meta:
         model = models.Usuario
         fields = "__all__"
@@ -70,12 +72,6 @@ class SerializadorAlternativa(serializers.ModelSerializer):
     class Meta:
         model=models.Alternativa
         fields = "__all__"
-
-class CargoSerializador(serializers.ModelSerializer):
-
-    class Meta:
-        model=models.Cargo
-        fields = '__all__'
 
 class RespuestaSerializador(serializers.ModelSerializer):
 

@@ -6,6 +6,8 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 
+from rest_framework.generics import ListAPIView
+
 
 from . import models, serializers
 
@@ -66,12 +68,6 @@ class EvaluacionViewsets (viewsets.ModelViewSet):
 
     permission_classes = [permissions.IsAuthenticated]
 
-class CargoViewsets (viewsets.ModelViewSet):
-    queryset = models.Cargo.objects.all()
-    serializer_class=serializers.CargoSerializador
-
-    permission_classes = [permissions.IsAuthenticated]
-
 class RespuestaViewsets (viewsets.ModelViewSet):
     queryset = models.Respuesta.objects.all()
     serializer_class = serializers.RespuestaSerializador
@@ -87,5 +83,20 @@ class CustomAuthToken(ObtainAuthToken):
         return Response({
             'token': token.key,
             'user_id': user.pk,
-            'username': user.username
+            'username': user.username,
+            'is_superuser': user.is_superuser,
+            'especialidad': user.especialidad
         })
+
+class ModulosPersonales(ListAPIView):
+    serializer_class = serializers.ModuloSerializer
+
+    def get_queryset(self):
+        especialidadID = self.kwargs['especialidadID']
+        return models.Modulo.objects.filter(especialidad=especialidadID)
+
+class ClasificacionUsuario(ListAPIView):
+    serializer_class = serializers.UsuarioSerializador
+
+    def get_queryset(self):
+        return models.Usuario.objects.order_by('-puntos')

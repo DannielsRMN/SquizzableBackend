@@ -1,9 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 
-class Cargo(models.Model):
-    idCargo = models.AutoField(primary_key=True)
-    nombreCargo = models.CharField(max_length=50)
+class Especialidad(models.Model):
+    idEspecialidad=models.AutoField(primary_key=True)
+    nombreEspecialidad=models.CharField(max_length=50)
 
 class UsuarioManager(BaseUserManager):
     def create_user(self,username,email,password=None,**extra_fields):
@@ -35,17 +35,13 @@ class Usuario(AbstractUser):
     fechaContratacion = models.DateField(null=True ,blank=True)
     puntos = models.IntegerField(default=0)
 
-    cargo = models.ForeignKey(Cargo, on_delete=models.CASCADE, null=True ,blank=True)
+    especialidad = models.ForeignKey(Especialidad, on_delete=models.CASCADE, null=True ,blank=True)
 
 class FotoPerfil(models.Model):
     idFoto = models.AutoField(primary_key=True)
     pfp = models.ImageField(upload_to="usuarios/", null=True, blank=True)
     
     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
-
-class Especialidad(models.Model):
-    idEspecialidad=models.AutoField(primary_key=True)
-    nombreEspecialidad=models.CharField(max_length=50)
 
 class Modulo(models.Model):
     idModulo=models.AutoField(primary_key=True)
