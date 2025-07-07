@@ -78,6 +78,8 @@ class PreguntaSerializer(serializers.ModelSerializer):
 
 class SerializadorAlternativa(serializers.ModelSerializer):
 
+    pregunta_ref = serializers.ReadOnlyField(source='pregunta.pregunta')
+
     class Meta:
         model=models.Alternativa
         fields = "__all__"
