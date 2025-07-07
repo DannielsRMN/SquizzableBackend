@@ -25,12 +25,11 @@ class UsuarioSerializador(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = models.Usuario(
-            email = validated_data['email'],
             username = validated_data['username'],
         )
         user.set_password(validated_data['password'])
         user.save()
-        return user
+        return user 
 
     def update(self, instance, validated_data):
         password = validated_data.pop('password', None)
@@ -57,6 +56,11 @@ class ModuloSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class ProgresoSerializer(serializers.ModelSerializer):
+
+    usuario_ref = serializers.ReadOnlyField(source='evaluacion.usuario.idUsuario')
+    user_name = serializers.ReadOnlyField(source='evaluacion.usuario.NombreUsuario')
+
+    tema_nombre = serializers.ReadOnlyField(source='evaluacion.pregunta.tema.nombreTema')
 
     class Meta:
         model = models.Progreso

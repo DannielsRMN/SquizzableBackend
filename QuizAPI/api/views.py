@@ -17,8 +17,7 @@ class FotoPerfilViewset(viewsets.ModelViewSet):
     queryset = models.FotoPerfil.objects.all()
     serializer_class = serializers.FotoPerfilSerializador
 
-    #permission_classes = [permissions.IsAuthenticated]
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
 
 class UsuarioViewset(viewsets.ModelViewSet):
     queryset = models.Usuario.objects.all()
@@ -95,8 +94,29 @@ class ModulosPersonales(ListAPIView):
         especialidadID = self.kwargs['especialidadID']
         return models.Modulo.objects.filter(especialidad=especialidadID)
 
+class ProgresoPersonales(ListAPIView):
+    serializer_class = serializers.ProgresoSerializer
+
+    def get_queryset(self):
+        usuarioID = self.kwargs['usuarioID']
+        return models.Progreso.objects.filter(usuario_ref=usuarioID)
+
+class TemasXModulo(ListAPIView):
+    serializer_class = serializers.TemaSerializer
+
+    def get_queryset(self):
+        moduloID = self.kwargs['moduloID']
+        return models.Tema.objects.filter(modulo=moduloID)
+
 class ClasificacionUsuario(ListAPIView):
     serializer_class = serializers.UsuarioSerializador
 
     def get_queryset(self):
         return models.Usuario.objects.order_by('-puntos')
+    
+class ClasificacionModularUsuario(ListAPIView):
+    serializer_class = serializers.UsuarioSerializador
+
+    def get_queryset(self):
+        especialidadID = self.kwargs['especialidadID']
+        return models.Usuario.objects.filter(especialidad=especialidadID).order_by('-puntos')
