@@ -84,7 +84,7 @@ class CustomAuthToken(ObtainAuthToken):
             'user_id': user.pk,
             'username': user.username,
             'is_superuser': user.is_superuser,
-            'especialidad': user.especialidad
+            'especialidad': user.especialidad.idEspecialidad if user.especialidad else None
         })
 
 class ModulosPersonales(ListAPIView):
