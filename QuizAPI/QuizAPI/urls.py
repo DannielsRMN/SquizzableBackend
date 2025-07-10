@@ -32,5 +32,6 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('login/', obtain_auth_token, name='api_token_auth'),
     path('api/token-auth/', views.CustomAuthToken.as_view(),name='token-auth'),
+    
     path('api/modulos/<int:especialidadID>/', views.ModulosPersonales.as_view(), name='modulos-personales'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
